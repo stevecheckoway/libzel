@@ -41,7 +41,6 @@ extern "C" {
 #include <stdbool.h>
 #endif
 
-#include <zel/z80_types.h>
 #include <zel/z80_instruction_types.h>
 
 /*! The type of a z80 instruction. Many z80 instructions are similar
@@ -220,7 +219,7 @@ extern const InstructionTemplate FDCB_Prefixed[256];
  * \param data Callback data from IF_ID().
  * \return The value at address \a addr.
  */
-typedef byte (*ReadMemFunction)(word addr, void *data);
+typedef uint8_t (*ReadMemFunction)(uint16_t addr, void *data);
 
 /*! Instruction fetch and instruction decode. Fetchs and decodes the
  * instruction pointed to by \a address into \a *inst.
@@ -232,7 +231,7 @@ typedef byte (*ReadMemFunction)(word addr, void *data);
  * \param data Arbitrary data passed to the \a ReadMem callback.
  * \return The length of the instruction.
  */
-int IF_ID( Instruction *inst, word address, ReadMemFunction ReadMem, void *data );
+int IF_ID( Instruction *inst, uint16_t address, ReadMemFunction ReadMem, void *data );
 
 /*! Disassemble the instruction pointed to by \a inst into \a buffer.
  * \param inst Pointer to an \c Instruction.

@@ -23,6 +23,8 @@
 #include <zel/z80.h> /* Need registers */
 #include <zel/z80_instructions.h>
 
+#include "z80_types.h"
+
 const InstructionTemplate Unprefixed[] =
 {
 #include "tables/no_prefix.tab"

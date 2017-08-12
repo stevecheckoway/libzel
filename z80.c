@@ -23,6 +23,8 @@
 #include <zel/z80.h>
 #include <zel/z80_instructions.h>
 
+#include "z80_types.h"
+
 struct Z80_t
 {
 	/* C guarantees consecutive layout */

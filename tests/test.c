@@ -23,6 +23,8 @@
 #include <assert.h>
 #include <zel/z80.h>
 
+#include "z80_types.h"
+
 extern byte data[];
 extern const size_t size;
 extern const byte interrupt_data[];

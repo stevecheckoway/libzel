@@ -22,6 +22,8 @@
 #include <string.h>
 #include <zel/z80_instructions.h>
 
+#include "z80_types.h"
+
 extern const char *disasm[];
 extern byte data[];
 

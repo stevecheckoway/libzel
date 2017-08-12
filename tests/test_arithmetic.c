@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <zel/z80.h>
 
+#include "z80_types.h"
+
 const char *disasm[] = {
 	"add a,b",
 	"sub c",

@@ -36,8 +36,6 @@ extern "C" {
 #include <stdbool.h>
 #endif
 
-#include <zel/z80_types.h>
-
 /*! Opaque type representing a z80 processor. */
 typedef struct Z80_t *Z80;
 
@@ -91,32 +89,32 @@ typedef struct
 	 * \param cpu The \c Z80 instance making the read call.
 	 * \return The byte from memory.
 	 */
-	byte (*ReadMem)(word addr, bool inst, Z80 cpu);
+	uint8_t (*ReadMem)(uint16_t addr, bool inst, Z80 cpu);
 	/*! Write a byte of memory.
 	 * \param addr The address to write.
 	 * \param val The byte to write.
 	 * \param cpu The \c Z80 instance making the write call.
 	 */
-	void (*WriteMem)(word addr, byte val, Z80 cpu);
+	void (*WriteMem)(uint16_t addr, uint8_t val, Z80 cpu);
 	/*! Read the interrupt data.
 	 * \param n Read the \a n th byte of data.
 	 * \param cpu The \c Z80 instance making the read call.
 	 */
-	byte (*ReadInterruptData)(word n, Z80 cpu);
+	uint8_t (*ReadInterruptData)(uint16_t n, Z80 cpu);
 	/*! Read a byte from an I/O port.
 	 * \param addr The contents of the address bus during the
 	 * request. The low 8 bits specify the port.
 	 * \param cpu The \c Z80 instance making the read call.
 	 * \return The byte from the I/O port.
 	 */
-	byte (*ReadIO)(word addr, Z80 cpu);
+	uint8_t (*ReadIO)(uint16_t addr, Z80 cpu);
 	/*! Write a byte from an I/O port.
 	 * \param addr The contents of the address bus during the
 	 * request. The low 8 bits specify the port.
 	 * \param val The byte to write.
 	 * \param cpu The \c Z80 instance making the read call.
 	 */
-	void (*WriteIO)(word addr, byte val, Z80 cpu);
+	void (*WriteIO)(uint16_t addr, uint8_t val, Z80 cpu);
 	/*! Notify the peripherials that a return from interrupt
 	 * instruction has occured.
 	 * \param cpu The \c Z80 instance performing the notification.
@@ -130,7 +128,7 @@ typedef struct
 	 * \param type The type of control flow.
 	 * \param cpu The \c Z80 instance performing the notification.
 	 */
-	void (*ControlFlow)(word pc, word target, ControlFlowType type, Z80 cpu);
+	void (*ControlFlow)(uint16_t pc, uint16_t target, ControlFlowType type, Z80 cpu);
 } Z80FunctionBlock;
 
 /*! Create a new \c Z80 instance using the callbacks specified in \a blk.
@@ -152,7 +150,7 @@ void Z80_Free( Z80 cpu );
  * \return The number of clock ticks that have elapsed while executing
  * the instruction.
  */
-int Z80_Step( word *outPC, Z80 cpu );
+int Z80_Step( uint16_t *outPC, Z80 cpu );
 
 /*! Check if \a cpu has halted.
  * \param cpu The \c Z80 instance.
@@ -165,14 +163,14 @@ bool Z80_HasHalted( Z80 cpu );
  * \param cpu The \c Z80 instance.
  * \return The contents of the register specified by \a reg.
  */
-word Z80_GetReg( int reg, Z80 cpu );
+uint16_t Z80_GetReg( int reg, Z80 cpu );
 
 /*! Set a 16 bit paired register.
  * \param reg The register to set.
  * \param value The value to assign to the register.
  * \param cpu The \c Z80 instance.
  */
-void Z80_SetReg( int reg, word value, Z80 cpu );
+void Z80_SetReg( int reg, uint16_t value, Z80 cpu );
 
 /*! Disassemble the z80 instruction pointed to by \a address into \a buffer.
  * \param address The address of the beginning the instruction.
@@ -183,7 +181,7 @@ void Z80_SetReg( int reg, word value, Z80 cpu );
  * function will be called to read the instructions.
  * \return The length of the instruction in bytes.
  */
-int Z80_Disassemble( word address, char *buffer, Z80 cpu );
+int Z80_Disassemble( uint16_t address, char *buffer, Z80 cpu );
 
 /*! Simulate the NMI pin going active. This causes the z80 to jump to
  * the nmi handler.

@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <z80.h>
 
+#include "z80_types.h"
+
 byte data[] = {};
 const byte interrupt_data [] = {};
 const byte input_data[] = {};

@@ -22,7 +22,7 @@ sources = $(wildcard test_*.c)
 tests = $(sources:.c=)
 itests = $(subst test,itest,$(tests))
 
-CPPFLAGS += -I../include
+CPPFLAGS += -I.. -I../include
 CFLAGS += -O3 -Wall -Werror
 LDFLAGS += -L..
 LIBS += -lzel

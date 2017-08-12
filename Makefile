@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-CPPFLAGS += -Iinclude
+CPPFLAGS += -I. -Iinclude
 CFLAGS += -O3
 
 package := zel
@@ -48,9 +48,9 @@ here	:= $(shell pwd)
 
 dist_source := z80.c \
 	       z80_instructions.c \
+	       z80_types.h \
 	       include/zel/z80.h \
 	       include/zel/z80_instructions.h \
-	       include/zel/z80_types.h \
 	       include/zel/z80_instruction_types.h \
 	       tables/gen.pl \
 	       $(spec) \
@@ -104,8 +104,8 @@ include/zel/z80_instruction_types.h: $(itables)
 	echo >>$@
 	echo '#endif' >>$@
 
-z80.o: z80.c include/zel/z80.h include/zel/z80_instructions.h include/zel/z80_types.h include/zel/z80_instruction_types.h
-z80_instructions.o: z80_instructions.c include/zel/z80_instructions.h include/zel/z80.h include/zel/z80_types.h include/zel/z80_instruction_types.h $(itables)
+z80.o: z80.c z80_types.h include/zel/z80.h include/zel/z80_instructions.h include/zel/z80_instruction_types.h
+z80_instructions.o: z80_instructions.c z80_types.h include/zel/z80_instructions.h include/zel/z80.h include/zel/z80_instruction_types.h $(itables)
 
 check: all
 	$(MAKE) -C tests check
@@ -140,14 +140,12 @@ install:
 	$(INSTALL) -d $(DESTDIR)$(includedir)/zel
 	$(INSTALL_DATA) include/zel/z80.h $(DESTDIR)$(includedir)/zel
 	$(INSTALL_DATA) include/zel/z80_instructions.h $(DESTDIR)$(includedir)/zel
-	$(INSTALL_DATA) include/zel/z80_types.h $(DESTDIR)$(includedir)/zel
 	$(INSTALL_DATA) include/zel/z80_instruction_types.h $(DESTDIR)$(includedir)/zel
 
 uninstall: uninstall-doc
 	$(RM) $(DESTDIR)$(libdir)/libzel.a
 	$(RM) $(DESTDIR)$(includedir)/zel/z80.h
 	$(RM) $(DESTDIR)$(includedir)/zel/z80_instructions.h
-	$(RM) $(DESTDIR)$(includedir)/zel/z80_types.h
 	$(RM) $(DESTDIR)$(includedir)/zel/z80_instruction_types.h
 	rmdir $(DESTDIR)$(includedir)/zel
 
