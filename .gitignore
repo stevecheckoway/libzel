@@ -1,0 +1,12 @@
+libzel.a
+include/zel/z80_types.tab
+*.o
+doc
+tables/*.tab
+tests/itest_arithmetic
+tests/itest_load
+tests/itest_set
+tests/test.o
+tests/test_arithmetic
+tests/test_load
+tests/test_set
