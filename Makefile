@@ -1,4 +1,4 @@
-# Copyright (c) 2008 Steve Checkoway
+# Copyright (c) 2008, 2017 Stephen Checkoway
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ dist_source := z80.c \
 	       include/zel/z80.h \
 	       include/zel/z80_instructions.h \
 	       include/zel/z80_types.h \
-	       include/zel/z80_types.tab \
+	       include/zel/z80_instruction_types.h \
 	       tables/gen.pl \
 	       $(spec) \
 	       $(itables) \
@@ -74,11 +74,38 @@ libzel.a: z80.o z80_instructions.o
 tables/%.tab: tables/%.spec tables/gen.pl
 	perl tables/gen.pl $< > $@
 
-include/zel/z80_types.tab: $(itables)
-	awk '{ split($$2,a,/_/); sub(/,/,"",a[1]); printf "%s //!< %s\n", $$2, tolower(a[1]) }' \
-		$(itables) |sort|uniq > $@
-z80.o: z80.c include/zel/z80.h include/zel/z80_instructions.h include/zel/z80_types.h include/zel/z80_types.tab
-z80_instructions.o: z80_instructions.c include/zel/z80_instructions.h include/zel/z80.h include/zel/z80_types.h include/zel/z80_types.tab $(itables)
+include/zel/z80_instruction_types.h: $(itables)
+	sed -e '1s,^,/* ,;2,$$s,^, * ,' LICENSE >$@
+	echo ' */' >>$@
+	echo >>$@
+	echo '/*! \\file' >>$@
+	echo ' *' >>$@
+	echo ' * z80 instruction types.' >>$@
+	echo ' * \\author Stephen Checkoway' >>$@
+	echo ' * \\version 0.1' >>$@
+	echo ' * \\date 2008, 2017' >>$@
+	echo ' */' >>$@
+	echo '#ifndef ZEL_Z80_INSTRUCTION_TYPES_H' >>$@
+	echo '#define ZEL_Z80_INSTRUCTION_TYPES_H' >>$@
+	echo >>$@
+	echo '#ifdef __cplusplus' >>$@
+	echo 'extern "C" {' >>$@
+	echo '#endif' >>$@
+	echo >>$@
+	echo 'typedef enum' >>$@
+	echo '{' >>$@
+	awk '{ split($$2,a,/_/); sub(/,/,"",a[1]); printf "\t%s //!< %s\n", $$2, tolower(a[1]) }' \
+		$(itables) |sort|uniq >>$@
+	echo '} InstructionType;' >>$@
+	echo >>$@
+	echo '#ifdef __cplusplus' >>$@
+	echo '}' >>$@
+	echo '#endif' >>$@
+	echo >>$@
+	echo '#endif' >>$@
+
+z80.o: z80.c include/zel/z80.h include/zel/z80_instructions.h include/zel/z80_types.h include/zel/z80_instruction_types.h
+z80_instructions.o: z80_instructions.c include/zel/z80_instructions.h include/zel/z80.h include/zel/z80_types.h include/zel/z80_instruction_types.h $(itables)
 
 check: all
 	$(MAKE) -C tests check
@@ -93,7 +120,7 @@ clean: doc-clean
 	$(MAKE) -C tests clean
 	$(RM) libzel.a z80.o z80_instructions.o *~
 
-doc: Doxyfile $(wildcard include/zel/*.h) include/zel/z80_types.tab
+doc: Doxyfile $(wildcard include/zel/*.h) include/zel/z80_instruction_types.h
 	doxygen
 
 pdf: doc/$(distname).pdf
@@ -114,14 +141,14 @@ install:
 	$(INSTALL_DATA) include/zel/z80.h $(DESTDIR)$(includedir)/zel
 	$(INSTALL_DATA) include/zel/z80_instructions.h $(DESTDIR)$(includedir)/zel
 	$(INSTALL_DATA) include/zel/z80_types.h $(DESTDIR)$(includedir)/zel
-	$(INSTALL_DATA) include/zel/z80_types.tab $(DESTDIR)$(includedir)/zel
+	$(INSTALL_DATA) include/zel/z80_instruction_types.h $(DESTDIR)$(includedir)/zel
 
 uninstall: uninstall-doc
 	$(RM) $(DESTDIR)$(libdir)/libzel.a
 	$(RM) $(DESTDIR)$(includedir)/zel/z80.h
 	$(RM) $(DESTDIR)$(includedir)/zel/z80_instructions.h
 	$(RM) $(DESTDIR)$(includedir)/zel/z80_types.h
-	$(RM) $(DESTDIR)$(includedir)/zel/z80_types.tab
+	$(RM) $(DESTDIR)$(includedir)/zel/z80_instruction_types.h
 	rmdir $(DESTDIR)$(includedir)/zel
 
 install-doc: install-html install-pdf
@@ -169,4 +196,4 @@ distcheck: $(distname).tar.gz
 distclean: clean
 mostlyclean: clean
 maintainer-clean: clean
-	$(RM) include/zel/z80_types.tab $(itables)
+	$(RM) include/zel/z80_instruction_types.h $(itables)

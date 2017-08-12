@@ -1,4 +1,4 @@
-/* Copyright (c) 2008 Steve Checkoway
+/* Copyright (c) 2008, 2017 Stephen Checkoway
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +22,9 @@
 /*! \file
  *
  * Create and run a z80 processor instance.
- * \author Steve Checkoway
+ * \author Stephen Checkoway
  * \version 0.1
- * \date 2008
+ * \date 2008, 2017
  */
 #ifndef ZEL_Z80_H
 #define ZEL_Z80_H

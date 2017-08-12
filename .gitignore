@@ -1,5 +1,5 @@
 libzel.a
-include/zel/z80_types.tab
+include/zel/z80_instruction_types.h
 *.o
 doc
 tables/*.tab

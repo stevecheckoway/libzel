@@ -1,4 +1,4 @@
-/* Written by Steve Checkoway, 2008. Released into the public domain. */
+/* Written by Stephen Checkoway, 2008, 2017. Released into the public domain. */
 #include <stdlib.h>
 #include <zel/z80.h>
 

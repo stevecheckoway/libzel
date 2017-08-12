@@ -1,4 +1,4 @@
-/* Copyright (c) 2008 Steve Checkoway
+/* Copyright (c) 2008, 2017 Stephen Checkoway
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +22,9 @@
 /*! \file
  *
  * Functions for decoding and disassembling z80 instructions.
- * \author Steve Checkoway
+ * \author Stephen Checkoway
  * \version 0.1
- * \date 2008
+ * \date 2008, 2017
  */
 #ifndef ZEL_Z80_INSTRUCTIONS_H
 #define ZEL_Z80_INSTRUCTIONS_H
@@ -42,6 +42,7 @@ extern "C" {
 #endif
 
 #include <zel/z80_types.h>
+#include <zel/z80_instruction_types.h>
 
 /*! The type of a z80 instruction. Many z80 instructions are similar
  * and share a common type. For example, <code>add a,b</code> and
@@ -59,11 +60,6 @@ extern "C" {
  * 	- \c MRR 16 bit paired register used as an address
  * 	- \c MNN 16 bit immediate used as an address
  */
-typedef enum
-{
-#include <zel/z80_types.tab>
-//! \includedoc z80_types.tab
-} InstructionType;
 
 #ifndef BYTE_ORDER
 #error define BYTE_ORDER
