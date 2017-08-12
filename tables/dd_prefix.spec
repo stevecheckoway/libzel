@@ -1,0 +1,252 @@
+DD00		NOP			8
+DD01 n n	LD BC,nn		14
+DD02		LD (BC),A		11
+DD03		INC BC			10
+DD04		INC B			8
+DD05		DEC B			8
+DD06 n		LD B,n			11
+DD07		RLCA			8
+DD08		EX AF,AF'		8
+DD09		ADD IX,BC		15
+DD0A		LD A,(BC)		11
+DD0B		DEC BC			10
+DD0C		INC C			8
+DD0D		DEC C			8
+DD0E n		LD C,n			11
+DD0F		RRCA			8
+DD10 e		DJNZ (PC+e)		12/17
+DD11 n n	LD DE,nn		14
+DD12		LD (DE),A		11
+DD13		INC DE			10
+DD14		INC D			8
+DD15		DEC D			8
+DD16 n		LD D,n			11
+DD17		RLA			8
+DD18 e		JR (PC+e)		16
+DD19		ADD IX,DE		15
+DD1A		LD A,(DE)		11
+DD1B		DEC DE			10
+DD1C		INC E			8
+DD1D		DEC E			8
+DD1E n		LD E,n			11
+DD1F		RRA			8
+DD20 e		JR NZ,(PC+e)		16/11
+DD21 n n	LD IX,nn		14
+DD22 n n	LD (nn),IX		16
+DD23		INC IX			10
+DD24		INC IXH			10	guess
+DD25		DEC IXH			10	guess
+DD26 n 		LD IXH,n		11	guess
+DD27		DAA			8
+DD28 e		JR Z,(PC+e)		16/11
+DD29		ADD IX,IX		15
+DD2A n n	LD IX,(nn)		14
+DD2B		DEC IX			10
+DD2C		INC IXL			10	guess
+DD2D		DEC IXL			10	guess
+DD2E n		LD IXL,n		11	guess
+DD2F		CPL			8
+DD30 e		JR NC,(PC+e)		16/11
+DD31 n n	LD SP,nn		14
+DD32 n n	LD (nn),A		17
+DD33		INC SP			10
+DD34 d		INC (IX+d)		23
+DD35 d		DEC (IX+d)		23
+DD36 d n	LD (IX+d),n		19
+DD37		SCF			8
+DD38 e		JR c,(PC+e)		16/11
+DD39		ADD IX,SP		15
+DD3A n n	LD A,(nn)		17
+DD3B		DEC SP			10
+DD3C		INC A			8
+DD3D		DEC A			8
+DD3E n		LD A,n			11
+DD3F		CCF			8
+DD40		LD B,B			8
+DD41		LD B,C			8
+DD42		LD B,D			8
+DD43		LD B,E			8
+DD44		LD B,IXH		8	guess
+DD45		LD B,IXL		8	guess
+DD46 d		LD B,(IX+d)		19
+DD47		LD B,A			8
+DD48		LD C,B			8
+DD49		LD C,C			8
+DD4A		LD C,D			8
+DD4B		LD C,E			8
+DD4C		LD C,IXH		8	guess
+DD4D		LD C,IXL		8	guess
+DD4E d		LD C,(IX+d)		19
+DD4F		LD C,A			8
+DD50		LD D,B			8
+DD51		LD D,C			8
+DD52		LD D,D			8
+DD53		LD D,E			8
+DD54		LD D,IXH		8	guess
+DD55		LD D,IXL		8	guess
+DD56 d		LD D,(IX+d)		19
+DD57		LD D,A			8
+DD58		LD E,B			8
+DD59		LD E,C			8
+DD5A		LD E,D			8
+DD5B		LD E,E			8
+DD5C		LD E,IXH		8	guess
+DD5D		LD E,IXL		8	guess
+DD5E d		LD E,(IX+d)		19
+DD5F		LD E,A			8
+DD60		LD IXH,B		8	guess
+DD61		LD IXH,C		8	guess
+DD62		LD IXH,D		8	guess
+DD63		LD IXH,E		8	guess
+DD64		LD IXH,IXH		8	guess
+DD65		LD IXH,IXL		8	guess
+DD66 d		LD H,(IX+d)		19
+DD67		LD IXH,A		8	guess
+DD68		LD IXL,B		8	guess
+DD69		LD IXL,C		8	guess
+DD6A		LD IXL,D		8	guess
+DD6B		LD IXL,E		8	guess
+DD6C		LD IXL,IXH		8	guess
+DD6D		LD IXL,IXL		8	guess
+DD6E d		LD L,(IX+d)		19
+DD6F		LD IXL,A		8	guess
+DD70 d		LD (IX+d),B		19
+DD71 d		LD (IX+d),C		19
+DD72 d		LD (IX+d),D		19
+DD73 d		LD (IX+d),E		19
+DD74 d		LD (IX+d),H		19
+DD75 d		LD (IX+d),L		19
+DD76		HALT			8
+DD77 d		LD (IX+d),A		19
+DD78		LD A,B			8
+DD79		LD A,C			8
+DD7A		LD A,D			8
+DD7B		LD A,E			8
+DD7C		LD A,IXH		8	guess
+DD7D		LD A,IXL		8	guess
+DD7E d		LD A,(IX+d)		19
+DD7F		LD A,A			8
+DD80		ADD A,B			8
+DD81		ADD A,C			8
+DD82		ADD A,D			8
+DD83		ADD A,E			8
+DD84		ADD A,IXH		8	guess
+DD85		ADD A,IXL		8	guess	
+DD86 d		ADD A,(IX+d)		19
+DD87		ADD A,A			8
+DD88		ADC A,B			8
+DD89		ADC A,C			8
+DD8A		ADC A,D			8
+DD8B		ADC A,E			8
+DD8C		ADC A,IXH		8	guess
+DD8D		ADC A,IXL		8	guess
+DD8E d		ADC A,(IX+d)		19
+DD8F		ADC A,A			8
+DD90		SUB B			8
+DD91		SUB C			8
+DD92		SUB D			8
+DD93		SUB E			8
+DD94		SUB IXH			8	guess
+DD95		SUB IXL			8	guess
+DD96 d		SUB (IX+d)		19
+DD97		SUB A			8
+DD98		SBC A,B			8
+DD99		SBC A,C			8
+DD9A		SBC A,D			8
+DD9B		SBC A,E			8
+DD9C		SBC A,IXH		8	guess
+DD9D		SBC A,IXL		8	guess
+DD9E d		SBC A,(IX+d)		19
+DD9F		SBC A,A			8
+DDA0		AND B			8
+DDA1		AND C			8
+DDA2		AND D			8
+DDA3		AND E			8
+DDA4		AND IXH			8	guess
+DDA5		AND IXL			8	guess
+DDA6 d		AND (IX+d)		19
+DDA7		AND A			8
+DDA8		XOR B			8
+DDA9		XOR C			8
+DDAA		XOR D			8
+DDAB		XOR E			8
+DDAC		XOR IXH			8	guess
+DDAD		XOR IXL			8	guess
+DDAE d		XOR (IX+d)		19
+DDAF		XOR A			8
+DDB0		OR B			8
+DDB1		OR C			8
+DDB2		OR D			8
+DDB3		OR E			8
+DDB4		OR IXH			8	guess
+DDB5		OR IXL			8	guess
+DDB6 d		OR (IX+d)		19
+DDB7		OR A			8
+DDB8		CP B			8
+DDB9		CP C			8
+DDBA		CP D			8
+DDBB		CP E			8
+DDBC		CP IXH			8	guess
+DDBD		CP IXL			8	guess
+DDBE d		CP (IX+d)		19
+DDBF		CP A			8
+DDC0		RET NZ			15/9
+DDC1		POP BC			14
+DDC2 n n	JP NZ,(nn)		14
+DDC3 n n	JP (nn)			14
+DDC4 n n	CALL NZ,(nn)		21/14
+DDC5		PUSH BC			15
+DDC6 n		ADD A,n			11
+DDC7		RST 0H			15
+DDC8		RET Z			15/9
+DDC9		RET			14
+DDCA n n	JP Z,(nn)		14
+DDCC n n	CALL Z,(nn)		21/14
+DDCD n n	CALL (nn)		21
+DDCE n		ADC A,n			11
+DDCF		RST 8H			15
+DDD0		RET NC			9
+DDD1		POP DE			14
+DDD2 n n	JP NC,(nn)		14
+DDD3 n		OUT (n),A		15
+DDD4 n n	CALL NC,(nn)		21/14
+DDD5		PUSH DE			15
+DDD6 n		SUB n			11
+DDD7		RST 10H			15
+DDD8		RET c			9
+DDD9		EXX			8
+DDDA n n	JP c,(nn)		14
+DDDB n		IN A,(n)		15
+DDDC n n	CALL c,(nn)		21/14
+DDDE n		SBC A,n			19
+DDDF		RST 18H			15
+DDE0		RET PO			15/9
+DDE1		POP IX			14
+DDE2 n n	JP PO,(nn)		14
+DDE3		EX (SP),IX		23
+DDE4 n n	CALL PO,(nn)		21/14
+DDE5		PUSH IX			15
+DDE6 n		AND n			11
+DDE7		RST 20H			15
+DDE8		RET PE			15/9
+DDE9		JP (IX)			8
+DDEA n n	JP PE,(nn)		14
+DDEB		EX DE,HL		8
+DDEC n n	CALL PE,(nn)		21/14
+DDEE n		XOR n			11
+DDEF		RST 28H			15
+DDF0		RET P			15/9
+DDF1		POP AF			14
+DDF2 n n	JP P,(nn)		14
+DDF3		DI			8
+DDF4 n n	CALL P,(nn)		21/14
+DDF5		PUSH AF			15
+DDF6 n		OR n			11
+DDF7		RST 30H			15
+DDF8		RET M			15/9
+DDF9		LD SP,IX		10
+DDFA n n	JP M,(nn)		14
+DDFB		EI			8
+DDFC n n	CALL M,(nn)		21/14
+DDFE n		CP n			11
+DDFF		RST 38H			15
