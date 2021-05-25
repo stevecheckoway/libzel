@@ -1,8 +1,6 @@
 libzel.a
-include/zel/z80_instruction_types.h
 *.o
 doc
-tables/*.tab
 tests/itest_arithmetic
 tests/itest_load
 tests/itest_set
